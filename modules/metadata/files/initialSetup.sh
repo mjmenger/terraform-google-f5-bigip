@@ -71,7 +71,13 @@ fi
 # Change the admin password, if available in Secrets Manager. Only do this once
 # to avoid resetting a customer password change.
 if [ ! -f /config/cloud/gce/adminPasswordChanged ]; then
-    ADMIN_PASSWORD="$(get_secret admin_password_key)"
+    USESECRETSMANAGER ="$(get_instance_attribute use_secrets_manager)"
+    if [[ $USESECRETSMANAGER == "false" ]]; then
+        ADMIN_PASSWORD="$(get_instance_attribute admin_password_key)"
+    else
+        ADMIN_PASSWORD="$(get_secret admin_password_key)"
+    fi
+
     if [ -n "${ADMIN_PASSWORD}" ]; then
         info "Changing admin password"
         # shellcheck disable=SC2086

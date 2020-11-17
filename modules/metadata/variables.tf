@@ -180,6 +180,16 @@ correctly. E.g. v15.1+.
 EOD
 }
 
+variable "use_secrets_manager" {
+  type        = string
+  default     = true
+  description = <<EOD
+If this value is set to true, the GCP Secrets Manager Secret Manager is used 
+as the store for the BIG-IP admin password. If this value is set to false the
+value of admin_password_secret_manager_key will be used as the password.
+EOD
+}
+
 variable "admin_password_secret_manager_key" {
   type        = string
   description = <<EOD
