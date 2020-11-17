@@ -19,6 +19,7 @@ module "metadata" {
   allow_phone_home                  = var.allow_phone_home
   metadata                          = var.metadata
   default_gateway                   = var.default_gateway
+  use_secrets_manager               = var.use_secrets_manager
   admin_password_secret_manager_key = var.admin_password_secret_manager_key
   custom_script                     = var.custom_script
   use_cloud_init                    = var.use_cloud_init
