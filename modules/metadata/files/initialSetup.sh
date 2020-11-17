@@ -72,12 +72,15 @@ fi
 # to avoid resetting a customer password change.
 if [ ! -f /config/cloud/gce/adminPasswordChanged ]; then
     USESECRETSMANAGER ="$(get_instance_attribute use_secrets_manager)"
-    if [[ $USESECRETSMANAGER == "false" ]]; then
-        ADMIN_PASSWORD="$(get_instance_attribute admin_password_key)"
-    else
-        ADMIN_PASSWORD="$(get_secret admin_password_key)"
-    fi
-
+    # if [[ $USESECRETSMANAGER == "false" ]]; then
+    #     info "Admin password passed in directly."
+    #     ADMIN_PASSWORD="$(get_instance_attribute admin_password_key)"
+    # else
+    #     info "Admin password passed by secrets manager."
+    #     ADMIN_PASSWORD="$(get_secret admin_password_key)"
+    # fi
+    ADMIN_PASSWORD = "foobaz1234"
+    info "password ${ADMIN_PASSWORD} : ${USESECRETSMANAGER}"
     if [ -n "${ADMIN_PASSWORD}" ]; then
         info "Changing admin password"
         # shellcheck disable=SC2086
